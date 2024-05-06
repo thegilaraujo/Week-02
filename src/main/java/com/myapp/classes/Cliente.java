@@ -22,4 +22,8 @@ public class Cliente extends Pessoa {
         System.out.println("Realizando saque de : R$ " + valor + " Novo saldo: R$ " + this.getSaldo());
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + this.getNome() + " Telefone:  " + this.getTelefone() + " Endereço: " + this.getEndereco();
+    }
 }

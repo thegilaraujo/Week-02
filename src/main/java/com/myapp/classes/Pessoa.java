@@ -2,6 +2,8 @@ package com.myapp.classes;
 
 import com.myapp.interfaces.ISaldo;
 
+import java.util.Objects;
+
 public abstract class Pessoa implements ISaldo {
 
     private String nome;
@@ -48,8 +50,21 @@ public abstract class Pessoa implements ISaldo {
         return saldo;
     }
 
+    public void transferir(ISaldo obj, double valor) {
+        this.sacar(valor);
+        obj.depositar(valor);
+    }
+
     @Override
-    public String toString() {
-        return "Pessoa: " + "Nome: " + getNome() + ", Telefone: " + getTelefone() + ", Endereço: " + getEndereco();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pessoa pessoa = (Pessoa) o;
+        return Double.compare(saldo, pessoa.saldo) == 0 && Objects.equals(nome, pessoa.nome) && Objects.equals(telefone, pessoa.telefone) && Objects.equals(endereco, pessoa.endereco);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, telefone, endereco, saldo);
     }
 }

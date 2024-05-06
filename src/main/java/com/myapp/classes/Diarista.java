@@ -1,5 +1,7 @@
 package com.myapp.classes;
 
+import java.util.Objects;
+
 public class Diarista extends Pessoa {
 
     private String chavePix;
@@ -31,5 +33,24 @@ public class Diarista extends Pessoa {
         double novoSaldo = saldoAtual - valor;
         this.setSaldo(novoSaldo);
         System.out.println("Realizando saque de : R$ " + valor + " Novo saldo: R$ " + this.getSaldo());
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + this.getNome() + " Telefone: " +  this.getTelefone() + " Endereço: " + this.getEndereco() + " Chave Pix: " + this.getChavePix();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Diarista diarista = (Diarista) o;
+        return Objects.equals(chavePix, diarista.chavePix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), chavePix);
     }
 }
